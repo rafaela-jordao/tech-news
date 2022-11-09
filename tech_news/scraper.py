@@ -1,8 +1,18 @@
-# iniciando o projeto tech news
+import requests
+import time
+
 
 # Requisito 1
-def fetch(url):
-    """Seu código deve vir aqui"""
+def fetch(url: str, wait: int = 2):
+    try:
+        headers = {"user-agent": "Fake user-agent"}
+        time.sleep(1)
+        response = requests.get(url, timeout=wait, headers=headers)
+        response.raise_for_status()
+    except (requests.HTTPError, requests.ReadTimeout):
+        return None
+    else:
+        return response.text
 
 
 # Requisito 2
