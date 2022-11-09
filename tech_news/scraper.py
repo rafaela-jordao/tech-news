@@ -1,9 +1,10 @@
 import requests
 import time
+from parsel import Selector
 
 
 # Requisito 1
-def fetch(url: str, wait: int = 2):
+def fetch(url: str, wait: int = 3):
     try:
         headers = {"user-agent": "Fake user-agent"}
         time.sleep(1)
@@ -17,7 +18,9 @@ def fetch(url: str, wait: int = 2):
 
 # Requisito 2
 def scrape_novidades(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(html_content).css(
+        "h2.entry-title a::attr(href)").getall()
+    return selector
 
 
 # Requisito 3
